@@ -1,6 +1,6 @@
 # Basic-auth
 
-A full stack application using react/redux, express, passport and knex.
+A full stack application using react, express, passport and knex.
 
 First, you will need a database (the current configuration expects postgres but this can be changed) running. Postgres setup guide: https://wiki.postgresql.org/wiki/Detailed_installation_guides
 
@@ -37,7 +37,7 @@ Passport is used in conjunction with a 'local' strategy. Docs: http://passportjs
 - Passport/Passport-local
 - Bcrypt
 - Express/Express-session
-- React/Redux
+- React
 - Knex/Postgres
 - Tape/Tap-spec
 
