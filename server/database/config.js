@@ -1,6 +1,5 @@
 // this is the config for connecting to the POSTGRES databse through knex
 // if this file is required connection to Postgres will be open
-
 require('dotenv').config();
 
 const knex = require('knex');

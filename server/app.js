@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 
-const userRoutes = require('../routes/user');
-const sessionRoutes = require('../routes/session');
-const setupPassport = require('./auth');
+const userRoutes = require('./routes/user');
+const sessionRoutes = require('./routes/session');
+const setupPassport = require('./auth').setup;
 const app = express();
 
 app.use(cookieParser());

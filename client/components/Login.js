@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
+import { login } from '../redux/session';
 
 class Login extends Component {
   static propTypes = {
@@ -24,24 +25,7 @@ class Login extends Component {
   };
 
   login = () => {
-    const options = {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(this.state),
-      credentials: 'same-origin'
-    };
-
-    fetch('/login', options)
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        console.log(res);
-        browserHistory.push('/profile/' + res.id);
-      });
+    this.props.login(this.state.username, this.state.password);
   };
 
   render() {
@@ -61,4 +45,20 @@ class Login extends Component {
   }
 }
 
-export default Login;
+function mapStateToProps(state) {
+  return {
+    ...state
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    login: (username, password) => {
+      dispatch(login(username, password));
+    }
+  };
+}
+
+const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export default LoginContainer;

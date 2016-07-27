@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+
 class App extends Component {
   static propTypes = {
     //propTypes go here

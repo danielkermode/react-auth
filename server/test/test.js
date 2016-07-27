@@ -2,16 +2,23 @@ const test = require('tape');
 const knex = require('../database/config')
 const db = require('../database/utils')(knex);
 
+
 //Only call this in the LAST test, to stop tests hanging and reset db
-function cleanUp() {
+function cleanUp(t) {
   knex.migrate.rollback()
     .then(() => {
       return knex.migrate.latest();
     })
     .then(() => {
       knex.destroy();
+      t.end();
     })
 }
+
+test('Server Tests', (t) => {
+  t.ok(true, 'Starting server tests...');
+  t.end();
+});
 
 test('add', (t) => {
   const toAdd = { username: 'another', password:'password'};
@@ -50,9 +57,8 @@ test('findOne', (t) => {
     .then(() => {
       db.findOne('users', { username: expected.username }, (err, data) => {
         t.deepEqual(data, expected, 'finds a user correctly');
-        t.end();
         //Only call this in the LAST test, to stop tests hanging and reset db
-        cleanUp();
+        cleanUp(t);
       });
     })
     .catch(err => {

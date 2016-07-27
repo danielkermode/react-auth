@@ -4,10 +4,10 @@
   "description": "react-auth",
   "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
-    "test": "tape test/*.js | tap-spec && cd client && babel-tape-runner test/*.js | tap-spec",
-    "database": "knex migrate:rollback && knex migrate:latest",
+    "start": "node ./server/bin/www",
+    "dev": "nodemon ./server/bin/www",
+    "test": "cd server && tape test/*.js | tap-spec && cd ../client && babel-tape-runner test/*.js | tap-spec",
+    "database": "cd server && knex migrate:rollback && knex migrate:latest",
     "build": "cd client && webpack --progress --profile --colors",
     "build:watch": "cd client && webpack --progress --profile --colors --watch",
     "client": "cd client && webpack-dev-server --hot --inline"
@@ -31,7 +31,10 @@
     "pg": "^6.0.3",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
+    "react-redux": "^4.4.5",
     "react-router": "^2.6.0",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
     "secure-random": "^1.1.1"
   },
   "devDependencies": {

@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { getUser } from '../redux/session';
 
 class Profile extends Component {
   static propTypes = {
@@ -7,33 +9,36 @@ class Profile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      //state goes here
-      username: ''
-    };
   }
 
   componentDidMount() {
-    const options = {
-      credentials: 'same-origin'
-    };
-    fetch('/user/' + this.props.params.id, options)
-      .then(res => {
-        const result = res.status === 403 ? 'Forbidden' : res.json();
-        return result;
-      })
-      .then(data => {
-        console.log(data);
-      });
+    this.props.getUser(this.props.params.id);
   }
 
   render() {
+    //const username = this.props.session.user.username ? this.props.session.user.username : '';
     return (
       <div>
-      Hi, {this.state.username}!
+      Hi
       </div>
     );
   }
 }
 
-export default Profile;
+function mapStateToProps(state) {
+  return {
+    ...state
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    getUser: (id) => {
+      dispatch(getUser(id));
+    }
+  };
+}
+
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+
+export default ProfileContainer;

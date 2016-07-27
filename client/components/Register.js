@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
+import { register } from '../redux/session';
 
 class Register extends Component {
   static propTypes = {
@@ -29,31 +30,9 @@ class Register extends Component {
   };
 
   register = () => {
-    let body = {};
     if(this.state.password === this.state.cPassword) {
-      body.username = this.state.username;
-      body.password = this.state.password;
+      this.props.register(this.state.username, this.state.password);
     }
-
-    const options = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(body)
-    };
-
-    fetch('/user', options)
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      })
   };
 
   render() {
@@ -77,4 +56,20 @@ class Register extends Component {
   }
 }
 
-export default Register;
+function mapStateToProps(state) {
+  return {
+    ...state
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    register: (username, password) => {
+      dispatch(register(username, password));
+    }
+  };
+}
+
+const RegisterContainer = connect(mapStateToProps, mapDispatchToProps)(Register);
+
+export default RegisterContainer;

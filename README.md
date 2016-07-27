@@ -1,6 +1,6 @@
 # Basic-auth
 
-A full stack application using react, express, passport and knex.
+A full stack application using react/redux, express, passport and knex.
 
 First, you will need a database (the current configuration expects postgres but this can be changed) running. Postgres setup guide: https://wiki.postgresql.org/wiki/Detailed_installation_guides
 
@@ -10,9 +10,7 @@ DB_USER=admin
 DB_PASS=password
 DB_NAME=dbname
 DB_HOST=127.0.0.1
-SESSION_SECRET=sessionsecret
 ```
-The session secret is used by express-session for authenticating sessions. Docs: https://github.com/expressjs/session
 
 Now, if the database is set up correctly (make sure it's an empty database) you should run ```npm run database``` which runs the knex migrations and seeds, essentially setting up the tables in your database for you. Knex docs: http://knexjs.org/
 
@@ -20,7 +18,7 @@ Now, if the database is set up correctly (make sure it's an empty database) you 
 
 ```npm run dev``` to run with nodemon.
 
-```npm test``` to run tests with Tape.
+```npm test``` to run tests with Tape. NOTE: you probably need a .env file in the server directory (identical to the other one) to run tests correctly.
 
 ## What it does:
 
@@ -37,7 +35,7 @@ Passport is used in conjunction with a 'local' strategy. Docs: http://passportjs
 - Passport/Passport-local
 - Bcrypt
 - Express/Express-session
-- React
+- React/Redux
 - Knex/Postgres
 - Tape/Tap-spec
 
